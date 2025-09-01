@@ -1,4 +1,4 @@
-package com.wipro.com.user_service.entity;
+package com.wipro.ecom.user_service.entity;
 
 import jakarta.persistence.*;
 

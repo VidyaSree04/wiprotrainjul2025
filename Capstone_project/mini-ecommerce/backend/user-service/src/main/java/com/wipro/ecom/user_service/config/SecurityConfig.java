@@ -1,4 +1,4 @@
-package com.wipro.com.user_service.config;
+package com.wipro.ecom.user_service.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

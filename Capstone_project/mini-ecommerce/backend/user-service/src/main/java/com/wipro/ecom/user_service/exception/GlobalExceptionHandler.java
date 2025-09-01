@@ -1,4 +1,4 @@
-package com.wipro.com.user_service.exception;
+package com.wipro.ecom.user_service.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

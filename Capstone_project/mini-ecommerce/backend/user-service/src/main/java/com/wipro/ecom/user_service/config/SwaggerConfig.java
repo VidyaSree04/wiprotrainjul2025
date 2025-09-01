@@ -1,4 +1,4 @@
-package com.wipro.com.user_service.config;
+package com.wipro.ecom.user_service.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

@@ -1,7 +1,8 @@
-package com.wipro.com.user_service.service;
+package com.wipro.ecom.user_service.service;
 
-import com.wipro.com.user_service.entity.User;
 import java.util.List;
+
+import com.wipro.ecom.user_service.entity.User;
 
 public interface UserService {
     User createUser(User user);

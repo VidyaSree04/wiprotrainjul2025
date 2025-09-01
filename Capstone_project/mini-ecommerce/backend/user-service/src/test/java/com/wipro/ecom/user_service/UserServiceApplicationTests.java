@@ -1,4 +1,4 @@
-package com.wipro.com.user_service;
+package com.wipro.ecom.user_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

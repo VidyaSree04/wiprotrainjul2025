@@ -1,9 +1,10 @@
-package com.wipro.com.user_service.service;
+package com.wipro.ecom.user_service.service;
 
-import com.wipro.com.user_service.entity.User;
-import com.wipro.com.user_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.wipro.ecom.user_service.entity.User;
+import com.wipro.ecom.user_service.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
