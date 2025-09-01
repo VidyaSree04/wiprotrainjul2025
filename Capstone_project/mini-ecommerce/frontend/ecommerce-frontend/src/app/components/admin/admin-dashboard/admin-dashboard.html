@@ -1,0 +1,32 @@
+<div class="admin-dashboard-container">
+  <h1>Admin Dashboard</h1>
+
+  <!-- Top Navbar -->
+  <nav class="admin-nav">
+    <button (click)="activeTab='products'" [class.active]="activeTab==='products'">Product Management</button>
+    <button (click)="activeTab='orders'" [class.active]="activeTab==='orders'">Order Management</button>
+    <button (click)="activeTab='users'" [class.active]="activeTab==='users'">User Management</button>
+  </nav>
+
+  <!-- Content Area -->
+  <div class="admin-content">
+    <!-- Products -->
+    <div *ngIf="activeTab==='products'">
+      <app-product-management></app-product-management>
+    </div>
+
+    <!-- Orders -->
+    <div *ngIf="activeTab==='orders'">
+      <!-- <h2>Orders Management</h2> -->
+      <app-orders-management></app-orders-management>
+      <!-- <p>Hello Page - Orders Management coming soon!</p> -->
+    </div>
+
+    <!-- Users -->
+    <div *ngIf="activeTab==='users'">
+      <!-- <h2>Users Management</h2> -->
+        <app-users-management></app-users-management>
+      <!-- <p>Hello Page - Users Management coming soon!</p> -->
+    </div>
+  </div>
+</div>

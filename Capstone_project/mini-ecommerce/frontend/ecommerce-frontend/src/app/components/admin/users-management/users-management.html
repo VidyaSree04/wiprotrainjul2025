@@ -1,0 +1,21 @@
+<h2>Users Management</h2>
+<p>This is a dummy Users Management page for admin.</p>
+
+<table class="users-table">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.id }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+    </tr>
+  </tbody>
+</table>
