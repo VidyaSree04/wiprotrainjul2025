@@ -1,0 +1,33 @@
+<!-- <div *ngIf="product">
+  <h2>{{ product.prodName }}</h2>
+  <img [src]="product.imageURL" alt="{{ product.prodName }}" width="200" />
+  <p>{{ product.prodDesc }}</p>
+  <p><strong>Price: {{ product.price }} {{ product.uom }}</strong></p>
+  <p>Rating: {{ product.prodRating }} ★</p>
+  <p>Available Qty: {{ product.availableQty }}</p>
+</div>
+
+<div *ngIf="!product">
+  <p>Loading product details...</p>
+</div> -->
+
+
+<div *ngIf="product; else notFound">
+  <h2>{{ product.prodName }}</h2>
+  <img
+    [src]="product.imageURL"
+    alt="{{ product.prodName }}"
+    width="300"
+    height="300"
+  />
+  <p>{{ product.prodDesc }}</p>
+  <p>Category: {{ product.prodCat }}</p>
+  <p>Price: {{ product.price }} {{ product.uom }}</p>
+  <p>Rating: {{ product.prodRating }}</p>
+  <p>Available: {{ product.availableQty }}</p>
+  <p>Date of Manufacture: {{ product.dateOfManufacture }}</p>
+</div>
+
+<ng-template #notFound>
+  <p>Product not found.</p>
+</ng-template>

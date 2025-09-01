@@ -1,0 +1,20 @@
+{
+  "/product-api/*": {
+    "target": "http://localhost:83",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/product-api": "" }
+  },
+  "/user-api/*": {
+    "target": "http://localhost:82",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/user-api": "" }
+  },
+  "/order-api/*": {
+    "target": "http://localhost:81",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/order-api": "" }
+  }
+}

@@ -1,0 +1,18 @@
+<h2>Available Products</h2>
+<div *ngIf="products.length === 0">No products available.</div>
+
+<div class="product-grid">
+  <div class="product-card" *ngFor="let product of products">
+    <img
+      [src]="product.imageURL"
+      alt="{{ product.prodName }}"
+      width="200"
+      height="200"
+    />
+    <h3>{{ product.prodName }}</h3>
+    <p>{{ product.prodDesc }}</p>
+    <p>Price: {{ product.price }} {{ product.uom }}</p>
+    <p>Rating: {{ product.prodRating }}</p>
+    <a [routerLink]="['/products', product.id]">View Details</a>
+  </div>
+</div>
