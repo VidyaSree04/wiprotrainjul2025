@@ -1,1 +1,55 @@
-<p>user-dashboard works!</p>
+<div class="user-dashboard-container">
+
+  <!-- ================== Top Actions ================== -->
+  <div class="top-actions">
+    <h2>Product Catalog</h2>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <!-- ================== Product Catalog ================== -->
+  <div class="product-catalog">
+    <div class="product-card" *ngFor="let product of products">
+      <img [src]="product.imageURL" alt="{{product.prodName}}" />
+      <h3>{{ product.prodName }}</h3>
+      <p>{{ product.prodDesc }}</p>
+      <p>Category: {{ product.prodCat }}</p>
+      <p>Price: ₹{{ product.price }}</p>
+      <p>Available: {{ product.availableQty }} {{ product.uom }}</p>
+      <div class="buy-section">
+        <input type="number" [(ngModel)]="quantityMap[product.id]" min="1" [max]="product.availableQty" [disabled]="product.availableQty === 0"/>
+        <button (click)="buyProduct(product.id)" [disabled]="product.availableQty === 0">Buy</button>
+      </div>
+      <p *ngIf="product.availableQty === 0" class="out-of-stock">Out of stock</p>
+    </div>
+  </div>
+
+  <!-- ================== My Orders ================== -->
+  <div class="my-orders">
+    <h2>My Orders</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Products</th>
+          <th>Total Amount</th>
+          <th>Status</th>
+          <th>Order Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderId }}</td>
+          <td>
+            <div *ngFor="let pid of orderProductIds(order)">
+              {{ productName(pid) }} × {{ order.productQuantityMap[pid] }}
+            </div>
+          </td>
+          <td>₹{{ order.totalAmount }}</td>
+          <td>{{ order.orderStatus }}</td>
+          <td>{{ order.orderDate | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

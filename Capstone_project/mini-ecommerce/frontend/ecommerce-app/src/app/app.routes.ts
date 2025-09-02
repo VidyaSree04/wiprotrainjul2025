@@ -11,6 +11,7 @@ import { AdminDashboardComponentProducts } from './admin-dashboard/products/admi
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard-main.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 
+
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
