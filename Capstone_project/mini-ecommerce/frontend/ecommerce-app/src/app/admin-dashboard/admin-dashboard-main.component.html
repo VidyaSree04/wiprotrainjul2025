@@ -1,0 +1,32 @@
+<div class="dashboard-container">
+  <h2>Admin Dashboard</h2>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button
+      [class.active]="activeTab() === 'products'"
+      (click)="setTab('products')">
+      Products
+    </button>
+    <button
+      [class.active]="activeTab() === 'orders'"
+      (click)="setTab('orders')">
+      Orders
+    </button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="dashboard-content">
+    <!-- Products tab -->
+    <div *ngIf="activeTab() === 'products'" class="section">
+      <h3>Products</h3>
+      <app-admin-dashboard-component-products></app-admin-dashboard-component-products>
+    </div>
+
+    <!-- Orders tab -->
+    <div *ngIf="activeTab() === 'orders'" class="section">
+      <!-- <h3>Orders</h3> -->
+      <app-admin-dashboard-component-orders></app-admin-dashboard-component-orders>
+    </div>
+  </div>
+</div>

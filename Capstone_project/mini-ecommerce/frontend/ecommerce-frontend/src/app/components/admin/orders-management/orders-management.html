@@ -1,21 +1,36 @@
 <h2>Orders Management</h2>
-<p>This is a dummy Orders Management page for admin.</p>
 
-<table class="orders-table">
-  <thead>
+<table class="order-table">
+  <thead style="background-color: #f0f0f0;">
     <tr>
       <th>Order ID</th>
-      <th>Customer</th>
-      <th>Total</th>
+      <th>User ID</th>
+      <th>Items</th>
+      <th>Total Amount</th>
       <th>Status</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
       <td>{{ order.id }}</td>
-      <td>{{ order.customer }}</td>
-      <td>{{ order.total }}</td>
-      <td>{{ order.status }}</td>
+      <td>{{ order.userId }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let item of order.items">
+            Product {{ item.productId }} x {{ item.quantity }} (₹{{ item.price }})
+          </li>
+        </ul>
+      </td>
+      <td>₹{{ order.totalAmount }}</td>
+      <td>
+        <select [(ngModel)]="order.status" (change)="updateStatus(order, order.status)">
+          <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+        </select>
+      </td>
+      <td>
+        <button (click)="cancelOrder(order)" [disabled]="order.status === 'CANCELLED'">Cancel</button>
+      </td>
     </tr>
   </tbody>
 </table>

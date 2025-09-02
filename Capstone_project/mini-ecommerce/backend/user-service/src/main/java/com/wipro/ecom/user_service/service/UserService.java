@@ -10,7 +10,8 @@ public interface UserService {
     void deleteUser(int id);
     List<User> getAllUsers();
     User getUserById(int id);
-    String login(String userId, String password);
+    // String login(String userId, String password);
+    User login(String userId, String password);
     String logout(int id);
     String getMenu(int id);
 }

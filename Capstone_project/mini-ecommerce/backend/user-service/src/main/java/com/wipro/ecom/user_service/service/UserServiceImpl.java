@@ -45,15 +45,26 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    // @Override
+    // public String login(String userId, String password) {
+    //     User user = userRepository.findByUserId(userId);
+    //     if (user != null && user.getPassword().equals(password)) {
+    //         user.setLoggedIn(true);
+    //         userRepository.save(user);
+    //         return "Login successful!";
+    //     }
+    //     return "Invalid credentials!";
+    // }
+
     @Override
-    public String login(String userId, String password) {
+    public User login(String userId, String password) {
         User user = userRepository.findByUserId(userId);
         if (user != null && user.getPassword().equals(password)) {
             user.setLoggedIn(true);
             userRepository.save(user);
-            return "Login successful!";
+            return user;
         }
-        return "Invalid credentials!";
+        return null; // Or throw exception
     }
 
     @Override

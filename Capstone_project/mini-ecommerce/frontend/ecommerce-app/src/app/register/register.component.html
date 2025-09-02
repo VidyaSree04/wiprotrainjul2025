@@ -1,0 +1,63 @@
+<div class="register-container">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="userId">User ID:</label>
+      <input id="userId" type="text" formControlName="userId" />
+      <div *ngIf="f['userId'].invalid && f['userId'].touched" class="validation-error">
+        <div *ngIf="f['userId'].errors?.['required']">User ID is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input id="firstName" type="text" formControlName="firstName" />
+      <div *ngIf="f['firstName'].invalid && f['firstName'].touched" class="validation-error">
+        <div *ngIf="f['firstName'].errors?.['required']">First name is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input id="lastName" type="text" formControlName="lastName" />
+      <div *ngIf="f['lastName'].invalid && f['lastName'].touched" class="validation-error">
+        <div *ngIf="f['lastName'].errors?.['required']">Last name is required.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="emailId">Email:</label>
+      <input id="emailId" type="email" formControlName="emailId" />
+      <div *ngIf="f['emailId'].invalid && f['emailId'].touched" class="validation-error">
+        <div *ngIf="f['emailId'].errors?.['required']">Email is required.</div>
+        <div *ngIf="f['emailId'].errors?.['email']">Email must be a valid email address.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input id="password" type="password" formControlName="password" />
+      <div *ngIf="f['password'].invalid && f['password'].touched" class="validation-error">
+        <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+        <div *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input id="address" type="text" formControlName="address" />
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid || loading">
+      <span *ngIf="!loading">Register</span>
+      <span *ngIf="loading">Registering...</span>
+    </button>
+  </form>
+
+  <div *ngIf="errorMessage" class="api-error-message">
+    {{ errorMessage }}
+  </div>
+
+  <p>Already have an account? <a [routerLink]="['/login']">Login here</a></p>
+</div>

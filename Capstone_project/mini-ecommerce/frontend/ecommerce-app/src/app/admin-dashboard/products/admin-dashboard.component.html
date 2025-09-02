@@ -1,0 +1,194 @@
+<h1 style="text-align: left; margin-bottom: 20px;">Admin - Product Management</h1><br/>
+
+<h2 class="add-product-page-title">Add New Product</h2>
+<div class="add-product-form-container">
+  <form class="add-product-form" (ngSubmit)="addProduct()">
+    <!-- Row 1: Name & Category -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="prodName">Product Name</label>
+        <input type="text" id="prodName" [(ngModel)]="newProduct.prodName" name="prodName" required />
+      </div>
+      <div class="form-group">
+        <label for="prodCat">Category</label>
+        <select id="prodCat" [(ngModel)]="newProduct.prodCat" name="prodCat" required>
+          <option value="">--Select--</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Home and Kitchen">Home and Kitchen</option>
+            <option value="Books">Books</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Row 2: Make & Description -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="make">Make</label>
+        <input type="text" id="make" [(ngModel)]="newProduct.make" name="make" />
+      </div>
+      <div class="form-group">
+        <label for="prodDesc">Description</label>
+        <textarea id="prodDesc" [(ngModel)]="newProduct.prodDesc" name="prodDesc" rows="2"></textarea>
+      </div>
+    </div>
+
+    <!-- Row 3: Price & Quantity -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" id="price" [(ngModel)]="newProduct.price" name="price" required />
+      </div>
+      <div class="form-group">
+        <label for="availableQty">Available Quantity</label>
+        <input type="number" id="availableQty" [(ngModel)]="newProduct.availableQty" name="availableQty" required />
+      </div>
+    </div>
+
+    <!-- Row 4: UOM, Rating, Image, Date -->
+    <div class="form-row">
+    <div class="form-group">
+      <label for="uom">UOM</label>
+      <select id="uom" [(ngModel)]="newProduct.uom" name="uom" required>
+        <option value="">--Select--</option>
+        <option value="Kg">Kg</option>
+        <option value="Piece">Piece</option>
+        <option value="Litre">Litre</option>
+      </select>
+    </div>
+
+      <div class="form-group">
+        <label for="prodRating">Rating</label>
+        <input type="number" id="prodRating" [(ngModel)]="newProduct.prodRating" name="prodRating" step="0.1" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="imageURL">Image URL</label>
+        <input type="text" id="imageURL" [(ngModel)]="newProduct.imageURL" name="imageURL" />
+      </div>
+      <div class="form-group">
+        <label for="dateOfManufacture">Date of Manufacture</label>
+        <input type="date" id="dateOfManufacture" [(ngModel)]="newProduct.dateOfManufacture" name="dateOfManufacture" />
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Add Product</button>
+  </form>
+</div>
+
+<!-- ================== Existing Products Table ================== -->
+<h2 style="text-align: left;">Existing Products</h2>
+<table class="product-table">
+  <thead style="background-color: #f0f0f0; color: #333;">
+    <tr>
+      <th>ID</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Make</th>
+      <th>Price</th>
+      <th>Qty</th>
+      <th>UOM</th>
+      <th>Rating</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.id }}</td>
+      <td><img [src]="product.imageURL" width="50" /></td>
+      <td>{{ product.prodName }}</td>
+      <td>{{ product.prodCat }}</td>
+      <td>{{ product.make }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.availableQty }}</td>
+      <td>{{ product.uom }}</td>
+      <td>{{ product.prodRating }}</td>
+      <td>
+        <button type="button" class="edit-btn" (click)="startEdit(product)">Edit</button>
+        <button type="button" class="delete-btn" (click)="deleteProduct(product.id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ================== Edit Product Modal ================== -->
+<div *ngIf="editingProduct" class="modal">
+  <div class="modal-content">
+    <h3>Edit Product: {{ editingProduct.prodName }}</h3>
+    <form class="add-product-form" (ngSubmit)="updateProduct()">
+      <!-- Row 1: Name & Category -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="editingProduct.prodName" name="editProdName" required />
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select [(ngModel)]="editingProduct.prodCat" name="editProdCat" required>
+            <option value="">--Select--</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Home and Kitchen">Home and Kitchen</option>
+            <option value="Books">Books</option>
+          </select>
+        </div>
+      </div>
+      <!-- Row 2: Make & Description -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Make</label>
+          <input type="text" [(ngModel)]="editingProduct.make" name="editMake" />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="editingProduct.prodDesc" name="editProdDesc" rows="2"></textarea>
+        </div>
+      </div>
+      <!-- Row 3: Price & Quantity -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Price</label>
+          <input type="number" [(ngModel)]="editingProduct.price" name="editPrice" />
+        </div>
+        <div class="form-group">
+          <label>Quantity</label>
+          <input type="number" [(ngModel)]="editingProduct.availableQty" name="editQty" />
+        </div>
+      </div>
+      <!-- Row 4: UOM & Rating -->
+      <div class="form-row">
+      <div class="form-group">
+        <label>UOM</label>
+        <select [(ngModel)]="editingProduct.uom" name="editUOM" required>
+          <option value="">--Select--</option>
+          <option value="Kg">Kg</option>
+          <option value="Piece">Piece</option>
+          <option value="Litre">Litre</option>
+        </select>
+      </div>
+
+        <div class="form-group">
+          <label>Rating</label>
+          <input type="number" [(ngModel)]="editingProduct.prodRating" name="editRating" step="0.1" />
+        </div>
+      </div>
+      <!-- Row 5: Image & Date -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>Image URL</label>
+          <input type="text" [(ngModel)]="editingProduct.imageURL" name="editImage" />
+        </div>
+        <div class="form-group">
+          <label>Date of Manufacture</label>
+          <input type="date" [(ngModel)]="editingProduct.dateOfManufacture" name="editDate" />
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-end;">
+        <button type="submit" class="submit-btn">Update</button>
+        <button type="button" class="cancel-btn" (click)="editingProduct = null">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

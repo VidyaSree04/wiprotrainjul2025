@@ -1,18 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // <-- Import FormsModule
+import { OrderService } from '../../../services/order.service';
+import { Order } from '../../../models/order';
 
 @Component({
   selector: 'app-orders-management',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule], // <-- Add FormsModule here
   templateUrl: './orders-management.html',
   styleUrls: ['./orders-management.css']
 })
-export class OrdersManagementComponent {
-  // Add dummy data if needed
-  orders = [
-    { id: 101, customer: 'John Doe', total: 1200, status: 'Pending' },
-    { id: 102, customer: 'Jane Smith', total: 850, status: 'Delivered' },
-    { id: 103, customer: 'Mike Johnson', total: 450, status: 'Cancelled' }
-  ];
+export class OrdersManagementComponent implements OnInit {
+  orders: Order[] = [];
+  statuses = ['PENDING', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'];
+
+  constructor(private orderService: OrderService) {}
+
+  ngOnInit(): void {
+    this.loadOrders();
+  }
+
+  loadOrders() {
+    this.orderService.getAllOrders().subscribe({
+      next: (res) => this.orders = res,
+      error: (err) => console.error(err)
+    });
+  }
+
+  updateStatus(order: Order, newStatus: string) {
+    this.orderService.updateOrderStatus(order.id, newStatus).subscribe({
+      next: (res) => {
+        order.status = res.status;
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  cancelOrder(order: Order) {
+    this.orderService.cancelOrder(order.id).subscribe({
+      next: (res) => {
+        order.status = res.status;
+      },
+      error: (err) => console.error(err)
+    });
+  }
 }

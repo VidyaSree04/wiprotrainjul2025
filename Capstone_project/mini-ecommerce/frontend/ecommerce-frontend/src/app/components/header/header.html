@@ -1,0 +1,14 @@
+<nav class="header-nav">
+  <a routerLink="/products">Home</a>
+  
+  <ng-container *ngIf="!isLoggedIn">
+    <a routerLink="/login">Login</a>
+    <a routerLink="/register">Register</a>
+  </ng-container>
+
+  <ng-container *ngIf="isLoggedIn">
+    <span>Welcome, {{ currentUser.firstName }}</span>
+    <a *ngIf="isAdmin()" routerLink="/admin">Admin Dashboard</a>
+    <button (click)="logout()">Logout</button>
+  </ng-container>
+</nav>

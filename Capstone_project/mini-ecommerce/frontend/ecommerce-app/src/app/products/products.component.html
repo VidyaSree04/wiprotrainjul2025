@@ -1,0 +1,46 @@
+<div class="products-page-container">
+  <div class="header">
+    <h2 class="title">Product Catalog</h2>
+    <div class="search-bar">
+      <input type="text" placeholder="Search products..." class="search-input">
+      <button class="search-btn">Search</button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="loading | async" class="message loading-message">
+    <div class="spinner"></div>
+    Loading products...
+  </ng-container>
+
+  <ng-container *ngIf="error | async" class="message error-message">
+    <span class="error-icon">⚠️</span>
+    Failed to load products. Please check your network connection.
+  </ng-container>
+
+  <div class="product-grid" *ngIf="(products$ | async) as products">
+    <div class="product-card" *ngFor="let product of products">
+      <img [ngSrc]="product.imageURL" [alt]="product.prodName" class="product-image" width="300" height="200">
+      <div class="card-content">
+        <h3 class="product-name">{{ product.prodName }}</h3>
+        <p class="product-desc">{{ product.prodDesc }}</p>
+        <div class="details-row">
+          <span class="product-category">{{ product.prodCat }}</span>
+          <span class="product-rating">Rating: {{ product.prodRating }} ★</span>
+        </div>
+        <div class="price-row">
+          <span class="product-price">{{ product.price | currency:'USD':'symbol' }}</span>
+          <span class="product-stock">Qty: {{ product.availableQty }}</span>
+        </div>
+        <div class="action-row">
+          <button class="add-to-cart-btn">Add to Cart</button>
+          <button class="view-details-btn">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!(products$ | async)?.length && !(loading | async) && !(error | async)" class="message no-products-message">
+    No products found.
+  </div>
+
+</div>

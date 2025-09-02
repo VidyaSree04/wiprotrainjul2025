@@ -86,11 +86,20 @@ public class UserController {
         return ResponseEntity.ok(menu);
     }
 
+    // @PostMapping("/login")
+    // public ResponseEntity<String> login(@RequestParam String userId, @RequestParam String password) {
+    //     String message = userService.login(userId, password);
+    //     if (message.equals("Login successful!")) return ResponseEntity.ok(message);
+    //     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
+    // }
+
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String userId, @RequestParam String password) {
-        String message = userService.login(userId, password);
-        if (message.equals("Login successful!")) return ResponseEntity.ok(message);
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
+    public ResponseEntity<User> login(@RequestParam String userId, @RequestParam String password) {
+        User user = userService.login(userId, password);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @PostMapping("/logout/{id}")

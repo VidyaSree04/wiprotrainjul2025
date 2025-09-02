@@ -1,0 +1,48 @@
+<div class="orders-container">
+  <!-- <h2>Orders</h2> -->
+
+  <div *ngIf="loading" class="loading-message">
+    Loading orders...
+  </div>
+
+  <table *ngIf="!loading && orders.length" class="orders-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>User ID</th>
+        <th>Product Name</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Status</th>
+        <th>Order Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.orderId }}</td>
+        <td>{{ order.userId }}</td>
+        <td>{{ order.productName }}</td>
+        <td>{{ order.productCategory }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>{{ order.totalAmount | currency:'USD' }}</td>
+        <td>
+          <!-- <select [(ngModel)]="order.status" (change)="updateStatus(order, $event)">
+            <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+          </select> -->
+          <select 
+            [(ngModel)]="order.status" 
+            (change)="updateStatus(order, $event)" 
+            [disabled]="order.status === 'CANCELLED' || order.status === 'DELIVERED'">
+            <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+          </select>
+        </td>
+        <td>{{ order.orderDate | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading && !orders.length" class="no-orders">
+    No orders found.
+  </div>
+</div>

@@ -1,0 +1,102 @@
+/* src/app/register/register.component.css */
+
+.register-container {
+  max-width: 450px; /* A bit narrower */
+  margin: 30px auto; /* Reduced top/bottom margin */
+  padding: 25px; /* Less padding inside */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register-container h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.8em; /* Slightly smaller font */
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px; /* Reduced vertical space between form groups */
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px; /* Reduced margin below labels */
+  color: #555;
+  font-size: 0.9em; /* Smaller label font */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px; /* Reduced padding inside input fields */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.95em; /* Smaller input font */
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1); /* Smaller box shadow on focus */
+  outline: none;
+}
+
+.validation-error {
+  color: #dc3545;
+  font-size: 0.8em; /* Smaller error message font */
+  margin-top: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px; /* Reduced button padding */
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1em; /* Smaller button font */
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+}
+
+.api-error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px; /* Reduced padding */
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+.register-container p {
+  text-align: center;
+  margin-top: 15px; /* Reduced margin */
+  color: #777;
+  font-size: 0.9em;
+}
+
+.register-container p a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-container p a:hover {
+  text-decoration: underline;
+}
