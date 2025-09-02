@@ -14,6 +14,7 @@ export class AdminDashboardComponentProducts implements OnInit {
   products: Product[] = [];
   newProduct: Product = this.emptyProduct();
   editingProduct: Product | null = null;
+  showAddProduct: boolean = false;
 
   constructor(private productService: AdminProductService) {}
 
@@ -28,11 +29,19 @@ export class AdminDashboardComponentProducts implements OnInit {
     });
   }
 
+  toggleAddProduct() {
+    this.showAddProduct = !this.showAddProduct;
+    if (this.showAddProduct) {
+      this.newProduct = this.emptyProduct(); // reset form whenever modal opens
+    }
+  }
+
   addProduct(): void {
     this.productService.addProduct(this.newProduct).subscribe({
-      next: () => {
-        this.loadProducts();
-        this.newProduct = this.emptyProduct();
+      next: (res) => {
+        this.products.push(res);        // update local list instantly
+        this.newProduct = this.emptyProduct(); // reset form
+        this.showAddProduct = false;    // close modal
       },
       error: (err) => console.error('Error adding product', err)
     });
@@ -43,8 +52,8 @@ export class AdminDashboardComponentProducts implements OnInit {
   }
 
   updateProduct(): void {
-    if (!this.editingProduct) return;
-    this.productService.updateProduct(this.editingProduct.id!, this.editingProduct).subscribe({
+    if (!this.editingProduct || this.editingProduct.id === undefined) return;
+    this.productService.updateProduct(this.editingProduct.id, this.editingProduct).subscribe({
       next: () => {
         this.loadProducts();
         this.editingProduct = null;
