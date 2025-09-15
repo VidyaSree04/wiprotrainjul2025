@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h2>My Orders</h2>
+
+  <div *ngIf="loading" class="my-3">Loading orders…</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div *ngIf="!loading && orders.length === 0" class="alert alert-info">
+    No orders found.
+  </div>
+
+  <div *ngFor="let order of orders" class="card mb-3 p-3 shadow-sm">
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <img [src]="order.productImage || placeholderImage" 
+             alt="{{ order.productName || 'Product' }}" 
+             style="width:120px;height:90px;object-fit:cover;border-radius:6px;">
+      </div>
+
+      <div class="col">
+        <div><strong>Order #{{ order.id }}</strong></div>
+        <div *ngIf="order.productName"><strong>{{ order.productName }}</strong></div>
+        <div>Product ID: {{ order.productId }}</div>
+        <div>Quantity: {{ order.quantity }}</div>
+        <div>Total Price: {{ order.totalPrice | currency:'INR' }}</div>
+        <div>
+          Status:
+          <span class="badge"
+                [ngClass]="{
+                  'bg-primary': order.status === 'PENDING',
+                  'bg-success': order.status === 'DELIVERED',
+                  'bg-danger': order.status === 'CANCELLED'
+                }">
+            {{ order.status }}
+          </span>
+        </div>
+        <div>Ordered On: {{ order.orderDate | date:'short' }}</div>
+
+        <div class="mt-2">
+          <button class="btn btn-outline-danger btn-sm"
+                  *ngIf="order.status !== 'CANCELLED' && order.status !== 'DELIVERED'"
+                  (click)="cancelOrder(order)">
+            Cancel Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

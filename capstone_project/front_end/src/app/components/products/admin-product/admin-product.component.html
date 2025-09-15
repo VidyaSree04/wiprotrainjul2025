@@ -1,0 +1,134 @@
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0 text-center fw-bold">⚙️ Admin — Manage Products</h2>
+    <div>
+      <button class="btn btn-primary me-2" (click)="showAddForm()" *ngIf="!addFormVisible && !editProduct">
+        + Add Product
+      </button>
+      <button class="btn btn-outline-secondary" (click)="hideAddForm()" *ngIf="addFormVisible">Close Add</button>
+    </div>
+  </div>
+
+  <!-- Add Product Card (visible when addFormVisible true and not editing) -->
+  <div class="card shadow-lg p-4 mb-4" *ngIf="addFormVisible && !editProduct">
+    <h4 class="mb-3 text-primary">➕ Add New Product</h4>
+    <form (ngSubmit)="addSubmit()" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Product Name</label>
+        <input class="form-control" [(ngModel)]="newProduct.name" name="addName" placeholder="Enter product name" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" [(ngModel)]="newProduct.price" name="addPrice" placeholder="₹ Price" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" class="form-control" [(ngModel)]="newProduct.quantity" name="addQuantity" placeholder="Stock" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Category</label>
+        <input class="form-control" [(ngModel)]="newProduct.category" name="addCategory" placeholder="Category">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Brand</label>
+        <input class="form-control" [(ngModel)]="newProduct.brand" name="addBrand" placeholder="Brand Name">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Date of Manufacturing</label>
+        <input type="date" class="form-control" [(ngModel)]="newProduct.manufacturingDate" name="addMfgDate">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Image URL</label>
+        <input class="form-control" [(ngModel)]="newProduct.imageUrl" name="addImageUrl" placeholder="https://example.com/image.jpg">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" [(ngModel)]="newProduct.description" name="addDescription" rows="2" placeholder="Short description"></textarea>
+      </div>
+      <div class="col-12 text-end">
+        <button class="btn btn-success px-4 mt-3" type="submit">Add Product</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Edit Product Card (visible when editProduct set) -->
+  <div class="card shadow-lg p-4 mb-4" *ngIf="editProduct">
+    <h4 class="mb-3 text-warning">✏️ Edit Product</h4>
+    <form (ngSubmit)="saveEdit()" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Product Name</label>
+        <input class="form-control" [(ngModel)]="editProduct.name" name="editName" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control" [(ngModel)]="editProduct.price" name="editPrice" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Quantity</label>
+        <input type="number" class="form-control" [(ngModel)]="editProduct.quantity" name="editQuantity" required>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Category</label>
+        <input class="form-control" [(ngModel)]="editProduct.category" name="editCategory">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Brand</label>
+        <input class="form-control" [(ngModel)]="editProduct.brand" name="editBrand">
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Date of Manufacturing</label>
+        <input type="date" class="form-control" [(ngModel)]="editProduct.manufacturingDate" name="editMfgDate">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Image URL</label>
+        <input class="form-control" [(ngModel)]="editProduct.imageUrl" name="editImageUrl">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" [(ngModel)]="editProduct.description" name="editDescription" rows="2"></textarea>
+      </div>
+      <div class="col-12 text-end">
+        <button class="btn btn-primary px-4 mt-3" type="submit">Save</button>
+        <button class="btn btn-secondary px-4 mt-3 ms-2" type="button" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Product Table -->
+  <div class="card shadow-lg p-4">
+    <h4 class="mb-3 text-primary">📦 Product List</h4>
+    <table class="table table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Mfg Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products">
+          <td>{{p.id}}</td>
+          <td>
+            <img [src]="p.imageUrl || 'https://via.placeholder.com/60'" alt="{{p.name}}" width="60" class="rounded shadow-sm">
+          </td>
+          <td>{{p.name}}</td>
+          <td>{{p.brand}}</td>
+          <td>{{p.category}}</td>
+          <td>₹{{p.price}}</td>
+          <td>{{p.quantity}}</td>
+          <td>{{p.manufacturingDate | date}}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" (click)="startEdit(p)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="delete(p.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

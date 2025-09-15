@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-4 shadow">
+  <!-- Left side brand -->
+  <a class="navbar-brand fw-bold text-primary" href="#">E-Commerce</a>
+
+  <div class="collapse navbar-collapse">
+    <!-- Search Box (centered / right side) -->
+    <form class="d-flex ms-auto me-3" (ngSubmit)="onSearch(searchInput.value)">
+  <input 
+    #searchInput 
+    class="form-control me-2" 
+    type="search" 
+    placeholder="Search"
+    aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+    <!-- Right side -->
+    <div *ngIf="!authService.isLoggedIn(); else loggedIn">
+      <a class="btn btn-outline-success me-2" routerLink="/login">Login</a>
+      <a class="btn btn-outline-info" routerLink="/register">Register</a>
+    </div>
+
+    <ng-template #loggedIn>
+  <span class="me-2 badge rounded-pill bg-light text-primary border">
+    Hi, {{ authService.getUsername() | titlecase }}
+  </span>
+
+  <!-- Admin view -->
+  <ng-container *ngIf="authService.hasRole('ADMIN'); else userButtons">
+    <a class="btn btn-outline-dark me-3" routerLink="/admin/products">Admin Products</a>
+    <a class="btn btn-outline-primary me-3" routerLink="/admin/orders">Manage Orders</a>
+  </ng-container>
+
+  <!-- User view -->
+  <ng-template #userButtons>
+    <a class="btn btn-outline-primary me-2" routerLink="/orders">Orders</a>
+    <a class="btn btn-outline-warning position-relative me-3" routerLink="/cart">
+          Cart
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          >
+            {{ cartCount }}
+          </span>
+        </a>
+  </ng-template>
+
+  <!-- Logout -->
+  <button class="btn btn-outline-danger" (click)="authService.logout()">Logout</button>
+</ng-template>
+
+  </div>
+</nav>

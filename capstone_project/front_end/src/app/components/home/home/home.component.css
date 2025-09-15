@@ -1,0 +1,120 @@
+
+.container-hero {
+  padding: 80px 20px; /* increase vertical spacing */
+  background: linear-gradient(135deg, #f0f4ff, #e8f7ff); /* soft gradient */
+  border-radius: 20px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.container-hero h1 {
+  color: #202169;
+  margin-bottom: 20px;
+}
+
+.container-hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+/* Hero container adjustments */
+.container-hero { 
+  margin-top: 36px; 
+  margin-bottom: 36px; 
+}
+
+.container-hero .img-fluid {
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(15,23,42,0.07);
+  max-height: 350px;     /* 👈 reduce hero image size */
+  width: 100%;
+  object-fit: cover;
+}
+
+.container-hero .btn { 
+  margin-right: .5rem; 
+}
+
+h4.mb-3 { 
+  font-weight:700; 
+  margin-bottom: 1rem; 
+  color: var(--text-900); 
+}
+
+/* Category cards small tweaks */
+.card .card-body { 
+  height: 100px;              
+  width: 100%;
+  object-fit: cover;          
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card .card-title { 
+  font-weight: 700;          
+  font-size: 1.1rem;         
+  color: #2d2d2d;            
+  text-align: center;        
+  margin-top: 0.5rem;
+  letter-spacing: 0.5px;  
+} 
+
+/* Welcome banner look & feel */
+.welcome-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;       /* 👈 slightly bigger padding */
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fff7ff, #eef7ff);
+  border: 1px solid rgba(0,0,0,0.05);
+  margin: 18px auto;        /* more breathing space below navbar */
+  max-width: 1100px;
+  position: relative;
+}
+
+.wb-left { 
+  flex: 0 0 auto; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+}
+
+.wb-gif { 
+  width: 36px; 
+  height: 36px; 
+  transform-origin: 70% 70%; 
+  animation: wave 1.8s ease-in-out infinite; 
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(18deg); }
+  20% { transform: rotate(-6deg); }
+  30% { transform: rotate(12deg); }
+  40% { transform: rotate(-3deg); }
+  50% { transform: rotate(6deg); }
+  60% { transform: rotate(0deg); }
+  100%{ transform: rotate(0deg); }
+}
+
+.wb-text { line-height: 1.2; }
+.wb-title { font-weight: 700; font-size: 1.2rem; color: #1f2a44; } /* 👈 slightly bigger */
+.wb-name {
+  background: linear-gradient(90deg, #7c3aed, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.wb-sub { margin-top: 4px; font-size: 1rem; color: #64748b; }
+
+.wb-close {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  border-radius: 8px;
+  padding: 2px 6px;
+  cursor: pointer;
+}
+.wb-close:hover { background: rgba(0,0,0,0.04); }

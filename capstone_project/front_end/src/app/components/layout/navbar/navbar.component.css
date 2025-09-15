@@ -1,0 +1,39 @@
+.navbar {
+  padding-top: 1rem;   /* increase top padding */
+  padding-bottom: 1rem; /* increase bottom padding */
+  min-height: 100px;    /* default is ~56px in Bootstrap */
+}
+
+
+.navbar-brand {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  color: #139E2B !important;
+  letter-spacing: 1px;
+  font-size: 2rem;
+}
+
+.navbar .btn {
+  
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 10px 20px;   /* more padding = bigger button */
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.navbar .btn:hover {
+  transform: scale(1.05);
+}
+
+input[type="search"] {
+ height: 55px; /* increase height */
+  font-size: 1rem;
+  border-radius: 25px;
+  padding-left: 20px;
+}
+.badge {
+   height: 40px;
+  font-weight: 800;
+  padding: .45rem .7rem;
+}

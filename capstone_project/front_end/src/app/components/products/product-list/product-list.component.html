@@ -1,0 +1,49 @@
+<div class="container my-4">
+  <!-- If no category chosen - display categories -->
+  <ng-container *ngIf="!category">
+    <h2 class="mb-3">Shop by category</h2>
+    <div class="row">
+      <div class="col-sm-6 col-md-3 mb-3" *ngFor="let c of categories">
+        <a class="card h-100 d-block text-decoration-none text-dark" [routerLink]="['/products']" [queryParams]="{ category: c.name }">
+          <img [src]="c.img" class="card-img-top" style="height:160px; object-fit:cover;">
+          <div class="card-body">
+            <h6 class="card-title mb-0">{{c.name}}</h6>
+          </div>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- If category chosen - display products -->
+  <ng-container *ngIf="category">
+    <button class="btn btn-ghost mb-3" (click)="backToCategories()">← Back to categories</button>
+    <h2 class="mb-3">Products — {{ category }}</h2>
+
+    <div *ngIf="loading" class="text-center py-4">Loading...</div>
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+    <div *ngIf="!loading && products.length === 0" class="alert alert-info">
+      No products found for "{{category}}".
+      <div class="mt-2">
+        <a class="btn btn-outline-primary btn-sm" (click)="backToCategories()">Show all categories</a>
+
+      </div>
+    </div>
+
+    <div class="row" *ngIf="!loading && products.length > 0">
+      <div class="col-md-4 mb-4" *ngFor="let p of products">
+        <div class="card h-100">
+          <img [src]="p.imageUrl || 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=60'" class="card-img-top" alt="{{p.name}}">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{p.name}}</h5>
+            <p class="text-muted">₹{{p.price}}</p>
+            <p class="small text-muted">Quantity: {{p.quantity ?? 'N/A'}}</p>
+            <div class="mt-auto">
+              <button class="btn btn-brand w-100" (click)="addToCart(p)" [disabled]="p.stock!==undefined && p.stock<=0">Add to cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
