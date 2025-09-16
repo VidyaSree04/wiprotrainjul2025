@@ -2,6 +2,8 @@
 
 .\kafka-server-start.bat ..\..\config\server.properties
 
+.\kafka-topics.bat --create --topic orderevents --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
 .\kafka-console-producer.bat --topic orderevents --bootstrap-server localhost:9092
 
 .\kafka-console-consumer.bat --topic orderevents --from-beginning --bootstrap-server localhost:9092
